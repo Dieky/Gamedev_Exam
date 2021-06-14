@@ -8,15 +8,12 @@ public class WaveSpawner : MonoBehaviour
     public Transform enemyPrefab;
     public Transform spawnPoint;
 
+    public PlayerStats playerStats;
+
     public float timeBetweenWaves = 5f;
     private float countdown = 2f;
-    private float gold = 0f;
-
-    private float hitpoints = 10f;
-
+  
     public Text waveCountdownText;
-    public Text GoldAmount;
-    public Text LivessAmount;
 
     private int waveIndex = 0;
     void Update()
@@ -26,11 +23,11 @@ public class WaveSpawner : MonoBehaviour
             StartCoroutine(SpawnWave());
             countdown = timeBetweenWaves;
         }
+
+        // UI updates
         countdown -= Time.deltaTime;
         waveCountdownText.text = Mathf.Round(countdown).ToString();
-        gold += Time.deltaTime;
-        GoldAmount.text = Mathf.Round(gold).ToString();
-        LivessAmount.text = hitpoints.ToString();
+
     }
 
     IEnumerator SpawnWave()
