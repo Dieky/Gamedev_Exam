@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     private Transform target;
 
+    public int damage = 50;
     public float bulletSpeed = 70f;
     public float explosionRadius = 0f;
     public GameObject impactEffect;
@@ -57,21 +58,24 @@ public class Bullet : MonoBehaviour
 
     void Explode()
     {
-        Collider [] colliders = Physics.OverlapSphere(transform.position,explosionRadius);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider collider in colliders)
         {
-            if(collider.tag == "Enemy")
+            if (collider.tag == "Enemy")
             {
                 Damage(collider.transform);
             }
         }
-        
-        
+
+
     }
 
     void Damage(Transform enemy)
     {
-
-        Destroy(enemy.gameObject);
+        Enemy e = enemy.GetComponent<Enemy>();
+        if (e != null)
+        {
+            e.TakeDamage(damage);
+        }
     }
 }

@@ -62,14 +62,15 @@ public class Node : MonoBehaviour
         {
             return;
         }
-        if (!buildManager.CanBuild)
-        {
-            return;
-        }
 
         if (turret != null)
         {
-            Debug.Log("Cant build here");
+            buildManager.SelectNode(this);
+            return;
+
+        }
+        if (!buildManager.CanBuild)
+        {
             return;
         }
 
